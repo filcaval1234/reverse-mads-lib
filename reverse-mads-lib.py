@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from random import randint
 
 def takeRamdomWords(strText, quantWords):
@@ -101,12 +103,18 @@ def retornToString(listText, originalText):
         except: continue
     return strText
 
-def openFile():
-    '''Opens the .txt file and returns a string that is text without changes
+def gameText():
+    '''Returns a string that is text without changes
 
     @:return a string that is text for the game'''
 
-    textOrigin = open("textExample.txt","r",encoding="utf-8").read()
+    textOrigin = "Não acredite em algo simplesmente porque ouviu. Não acredite em algo\n"\
+                 "simplesmente porque todos falam a respeito. Não acredite em algo simplesmente\n"\
+                 "porque está escrito em seus livros religiosos. Não acredite em algo só porque seus\n"\
+                 "professores e mestres dizem que é verdade. Não acredite em tradições só porque\n"\
+                 "foram passadas de geração em geração. Mas depois de muita análise e\n"\
+                 "observação, se você vê que algo concorda com a razão, e que conduz ao bem e\n"\
+                 "beneficio de todos, aceite-o e viva-o."
     return textOrigin
 
 def endGame(wordsRamdomList, strText):
@@ -135,7 +143,7 @@ def inputLevelGame():
     while True:
         levelGame = input("Choose the level of the game:\nEasy\nMedium\nHard\n").upper()
         try:
-            wordsBlank, strText = takeRamdomWords(openFile(), levelsGame[levelGame])
+            wordsBlank, strText = takeRamdomWords(gameText(), levelsGame[levelGame])
             break
         except:
             print("Invalid option try again: \n")
@@ -154,7 +162,7 @@ def main():
         searchWord = input()
         if searchWord == wordsBlank[counter]:
             copyStrText = replaceWords(wordBlank(counter),searchWord, stringToListString(strText))
-            strText = retornToString(copyStrText, openFile())
+            strText = retornToString(copyStrText, gameText())
             counter +=1
             print("\n",strText,"\n")
         else: print("Ops!!! This is not the word number ",counter+1," try again!!!")
