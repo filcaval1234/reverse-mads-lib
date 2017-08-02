@@ -1,4 +1,4 @@
-# Systemverilog-vocabulary-extractor
+# reverse-mads-lib
 
 Após dicas preciosas do coordenador Carlos Vido, preparei esse tutorial para todos
 que tentarem executar meu projeto. Seguindo também de uma rápida descrição do mesmo,
