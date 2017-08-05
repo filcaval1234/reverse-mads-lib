@@ -3,47 +3,47 @@
 from random import randint
 
 def takeRamdomWords(strText, quantWords):
-    """The takeRamdomWords function The text itself and the number of words are removed from it
-
-    @:parameter strText String representing the text itself
-    @:parameter quantWords Number of words that will be replaced by something like
-    ___% d___ (%d being an integer)
-    @:return List of strings that are the words that have been substituted
-    of the text, and also the text itself with the words replaced
-    by ___% d___ (% d being an integer)"""
-
+    """
+        Behavior: It randomly selects a set of words and then substitutes
+    all that are equal by a_ __%d___ (%d integer) of the same value.
+        Input: The text that will be manipulated and the number of words that will be removed.
+        Output: List with the words that were randomly taken, with no repetition and
+    a string already with the appropriate blanks.
+    """
     copyStrText = stringToListString(strText)
     ramdomWordsList, numGenerates = [], []
-    i = 0
+    iterador = 0
     illegalWords = ["\n", '\ufeff', "", " "]
-    while i != quantWords:
+    while iterador != quantWords:
         ramdNum = randint(0,len(copyStrText)-1)
         ramdomWord = copyStrText[ramdNum]
         if(ramdomWord not in illegalWords) and numbersInSequence(numGenerates, ramdNum):
             numGenerates.append(ramdNum)
             ramdomWordsList.append(ramdomWord)
-            copyStrText = replaceWords(ramdomWord, wordBlank(i), copyStrText)
-            illegalWords.append(wordBlank(i))
-            i +=1
+            copyStrText = replaceWords(ramdomWord, wordBlank(iterador), copyStrText)
+            illegalWords.append(wordBlank(iterador))
+            iterador +=1
     return ramdomWordsList, retornToString(copyStrText, strText)
 
 def wordBlank(index):
-    """The wordBlank function Returns a string in the format ___% d___ (%d being an integer),
-    which will be the word to replace the words taken at random
-
-    @:return a string that will replace the words chosen in the text"""
+    """
+        Behavior: Returns a string in the format ___% d___ (%d being an integer),
+    which will be the word to replace the words taken at random.
+        Input: The number of the blank.
+        Output: A string that will replace the words chosen in the text.
+    """
 
     return "___"+str(index+1)+"___"
 
 def numbersInSequence(listaNum, num):
-    """The numbersInSequence function Analyzes whether there
-    is no predecessor or successor number to the randomly generated number.
-
-    @:parameter listaNum, List of numbers already generated
-    @:parameter num, Last number generated
-    @:return True if the list does not contain a predecessor
+    """
+        Behavior: Analyzes whether there is no predecessor or successor
+    number to the randomly generated number.
+        Input: A list of numbers already generated and the last number generated.
+        Output: True if the list does not contain a predecessor
     or successor value to the value passed as a parameter in the function
-    Otherwise false"""
+    Otherwise false
+    """
 
     state = True
     if (num + 1) in listaNum or (num - 1) in listaNum:
@@ -51,13 +51,13 @@ def numbersInSequence(listaNum, num):
     return state
 
 def stringToListString(strText, dot_comma = True):
-    """The stringToListString function takes two arguments and does the String slicing without commas
-    and points if dot_comma is true, if dot_comma is false the slicing is done with dots and commas
-
-    @:parameter strText, Type string representing the text to be sliced
-    @:parameter dot_commaBoolean, type, if true the dots and commas will
-    be taken from the text otherwise
-    @:return a list of strings"""
+    """
+        Behavior: Does the String slicing without commas
+    and points if dot_comma is true, if dot_comma is false the slicing is done with dots and commas.
+        Input: A string representing the text to be sliced and a boolean if true the dots and
+    commas will be taken from the text, otherwise not.
+        Output: A list containing all words in the string as its elements.
+        """
 
     spaceOnSplit = " "
     copyStrText = strText
@@ -70,44 +70,44 @@ def stringToListString(strText, dot_comma = True):
     return copyStrText
 
 def replaceWords(word, substituteWord, listText):
-    """the replaceWords function receives three arguments and replaces
-    all values equal to the first argument in listText by the second.
+    """
+        Behavior: replaces all values equal to the first argument in listText by the second.
+        Input: Searched word in the list and will be replaced with word that will replace all
+    that are equal to word and a vector of strings representing the original text.
+        Output: A vector where the necessary substitutions were made.
+    """
 
-    @:parameter word, Searched word in the list and will be replaced
-    @:parameter substituteWord, Word that will replace all that are equal to word
-    @:parameter listText, A vector of strings representing the original text
-    @:return A vector where the necessary substitutions were made"""
-
-    for i in range(len(listText)):
-        if listText[i] == word:
-            listText[i] = substituteWord
+    for index in range(len(listText)):
+        if listText[index] == word:
+            listText[index] = substituteWord
     return  listText
 
 def retornToString(listText, originalText):
-    """The returnToString function takes two arguments a vector of strings and a string
-    By recreating a new string from the two arguments passed.
-
-    @:parameter listaText A vector of strings representing the original text
-    @:parameter originalText Original text a unique String
-    @:return A string recipe from the string vector(listText) and the original text (originalText)"""
+    """
+        Behavior: Create a string with the elements of the list
+    received by based on whether the string also received as a parameter.
+        Input: A vector of strings representing the original text and
+    Original text a unique String.
+        Output: A string recipe from the string vector(listText) and the original text (originalText).
+    """
 
     strText = ""
     spaceOnWords = " "
     originalTextList = stringToListString(originalText,False)
-    for i in range(len(listText)):
+    for index in range(len(listText)):
         try:
-            if originalTextList[i][:-1] == listText[i]:
-                strText += originalTextList[i]+spaceOnWords
+            if originalTextList[index][:-1] == listText[index]:
+                strText += originalTextList[index]+spaceOnWords
             else:
-                strText += listText[i]+spaceOnWords
+                strText += listText[index]+spaceOnWords
         except: continue
     return strText
 
 def gameText():
-    '''Returns a string that is text without changes
-
-    @:return a string that is text for the game'''
-
+    """
+        Behavior: returns a string that is text without changes.
+        Output: a string that is text for the game
+    """
     textOrigin = "Não acredite em algo simplesmente porque ouviu. Não acredite em algo\n"\
                  "simplesmente porque todos falam a respeito. Não acredite em algo simplesmente\n"\
                  "porque está escrito em seus livros religiosos. Não acredite em algo só porque seus\n"\
@@ -118,26 +118,27 @@ def gameText():
     return textOrigin
 
 def endGame(wordsRamdomList, strText):
-    '''The endGame function Verifies that the game has come to an end, that is, the player has
+    """
+        Behavior: Verifies that the game has come to an end, that is, the player has
     been able to guess all the words Receiving two arguments the list of random words taken from the text
-     and the text itself
-
-    @:parameter wordsRamdomList, List of random words that were taken from the text
-    @:parameter strText, The text itself without changes
-    @:return True if the player was able to guess all the words, or false if he still has not left words'''
+    and the text itself.
+        Input: List of random words that were taken from the text and The text itself without changes.
+        Output: True if the player was able to guess all the words, or false if he still has not left words
+    """
 
     state = True
-    for i in range(len(wordsRamdomList)):
-        blank = "___"+str(i+1)+"___"
-        if strText.count(blank) != 0:
+    for numberWord in range(1, len(wordsRamdomList)+1):
+        blank = "___"+str(numberWord)+"___"
+        if strText.count(blank):
             state = False
     return state
 
 def inputLevelGame():
-    """The function receives the user a valid level (easy, medium, hard)
-    and returns a list of words that have been removed and the text after these words are removed
-
-    @:return List of words taken and the text after removing the words from the list"""
+    """
+        Behavior: receives the user a valid level (easy, medium, hard)
+    and returns a list of words that have been removed and the text after these words are removed.
+        Output: List of words taken and the text after removing the words from the list
+    """
 
     levelsGame = {"EASY": 4, "MEDIUM": 7, "HARD": 9}
     while True:
@@ -152,8 +153,10 @@ def inputLevelGame():
     return wordsBlank, strText
 
 def main():
-    """the main function, Main function where the game is executed, does not r
-    eceive arguments and has no return"""
+    """
+        Behavior: Is the main function executing all other functions in a systematic
+        way and according to the requirements without parameters or return.
+    """
 
     counter = 0
     wordsBlank, strText = inputLevelGame()
